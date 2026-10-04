@@ -37,6 +37,7 @@ Thumbs.db
 # Java / Class outputs
 *.class
 *.jar
+!backend/lib/*.jar
 *.war
 *.nar
 *.ear
