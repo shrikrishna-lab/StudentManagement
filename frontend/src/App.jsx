@@ -20,9 +20,9 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('edutrack_auth_user');
-      return saved ? JSON.parse(saved) : DEMO_ACCOUNTS.student;
+      return saved ? JSON.parse(saved) : null;
     } catch {
-      return DEMO_ACCOUNTS.student;
+      return null;
     }
   });
 
