@@ -3866,8 +3866,8 @@ tbody tr:hover {
 .profile-modal-card {
   position: relative;
   width: 100%;
-  max-width: 640px;
-  max-height: 88vh;
+  max-width: 700px;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -3899,20 +3899,31 @@ tbody tr:hover {
 /* Sky Cover Header */
 .profile-modal-sky-cover {
   position: relative;
-  height: 105px;
-  background: linear-gradient(135deg, #065f46 0%, #059669 45%, #10b981 100%);
+  height: 110px;
+  background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #34d399 100%);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding: 18px 22px;
   overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-modal-sky-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 50%, rgba(16,185,129,0.15) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .profile-modal-sky-cover::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+  background: radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.18) 0%, transparent 55%);
   pointer-events: none;
 }
 
@@ -4252,34 +4263,41 @@ tbody tr:hover {
 .profile-nav-pills-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
+  gap: 4px;
   background: #f1f5f9;
   border: 1px solid #e2e8f0;
-  border-radius: 999px;
-  padding: 5px;
+  border-radius: 14px;
+  padding: 4px;
   margin: 12px 24px 18px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.profile-nav-pills-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .profile-nav-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 8px 18px;
-  border-radius: 999px;
+  gap: 5px;
+  padding: 7px 13px;
+  border-radius: 10px;
   border: none;
   background: transparent;
   color: #64748b;
-  font-size: 0.8rem;
+  font-size: 0.775rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.18s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .profile-nav-pill:hover {
   color: #0f172a;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .profile-nav-pill.active {
@@ -4290,9 +4308,9 @@ tbody tr:hover {
 }
 
 .id-card-new-pill {
-  font-size: 0.625rem;
+  font-size: 0.575rem;
   font-weight: 800;
-  padding: 2px 6px;
+  padding: 1px 5px;
   border-radius: 999px;
   background: #10b981;
   color: #ffffff;
