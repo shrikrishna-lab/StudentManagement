@@ -3968,6 +3968,7 @@ tbody tr:hover {
 /* Avatar Hero Section */
 .profile-modal-header-hero {
   position: relative;
+  z-index: 4;
   padding: 0 24px;
   margin-top: -48px;
   display: flex;

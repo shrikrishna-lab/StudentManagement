@@ -108,12 +108,19 @@ export default function ProfileModal({
       }
       if (currentRole === 'student') {
         const stored = getStoredStudentProfile();
-        setFormData((prev) => ({
-          ...prev,
-          ...stored,
-          notifications: prev.notifications ?? true,
-          securityAlerts: prev.securityAlerts ?? true
-        }));
+        setFormData((prev) => {
+          const { designation, staffId, specialization, teachingLoad, ...restPrev } = prev;
+          return {
+            ...restPrev,
+            ...stored,
+            designation: undefined,
+            staffId: undefined,
+            specialization: undefined,
+            teachingLoad: undefined,
+            notifications: prev.notifications ?? true,
+            securityAlerts: prev.securityAlerts ?? true
+          };
+        });
         const matched = PRESET_STUDENT_PERSONAS.find((p) => p.rollNumber === stored.rollNumber);
         if (matched) {
           setActivePersonaId(matched.id);
@@ -170,7 +177,6 @@ export default function ProfileModal({
   const handleSelectStudentPersona = (persona) => {
     setActivePersonaId(persona.id);
     const updated = {
-      ...formData,
       name: persona.name,
       gender: persona.gender,
       email: persona.email,
@@ -188,7 +194,9 @@ export default function ProfileModal({
       avatarUrl: persona.avatarUrl,
       attendancePercentage: persona.attendancePercentage,
       feeStatus: persona.feeStatus,
-      bloodGroup: persona.gender === 'Female' ? 'A+' : 'O+'
+      bloodGroup: persona.gender === 'Female' ? 'A+' : 'O+',
+      notifications: formData.notifications ?? true,
+      securityAlerts: formData.securityAlerts ?? true
     };
     setFormData(updated);
     saveStoredStudentProfile(updated);
@@ -360,32 +368,32 @@ export default function ProfileModal({
   return (
     <div className="profile-modal-backdrop" onClick={onClose}>
       <div className="profile-modal-card" onClick={(e) => e.stopPropagation()}>
-        {/* Top Cover Banner */}
-        <div className="profile-modal-sky-cover">
-          <div className="profile-modal-cover-brand">
-            <GraduationCap size={18} className="profile-modal-brand-icon" />
-            <span className="profile-modal-brand-text">
-              {isTeacher
-                ? 'EduTrack Faculty & Staff Dossier'
-                : isAdmin
-                ? 'EduTrack Institutional Administrator'
-                : 'EduTrack Institutional Student Profile'}
-            </span>
-          </div>
-
-          <button
-            type="button"
-            className="profile-modal-close-pill"
-            onClick={onClose}
-            aria-label="Close Profile Modal"
-            title="Close modal"
-          >
-            <X size={16} />
-          </button>
-        </div>
-
         {/* Scrollable Modal Body Container */}
         <div className="profile-modal-body-scroll">
+          {/* Top Cover Banner */}
+          <div className="profile-modal-sky-cover">
+            <div className="profile-modal-cover-brand">
+              <GraduationCap size={18} className="profile-modal-brand-icon" />
+              <span className="profile-modal-brand-text">
+                {isTeacher
+                  ? 'EduTrack Faculty & Staff Dossier'
+                  : isAdmin
+                  ? 'EduTrack Institutional Administrator'
+                  : 'EduTrack Institutional Student Profile'}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              className="profile-modal-close-pill"
+              onClick={onClose}
+              aria-label="Close Profile Modal"
+              title="Close modal"
+            >
+              <X size={16} />
+            </button>
+          </div>
+
           {/* Hero Avatar & Identity Section */}
           <div className="profile-modal-header-hero">
           <div className="profile-modal-avatar-wrapper">
@@ -410,10 +418,10 @@ export default function ProfileModal({
                     : '👨‍🏫 Faculty Member'
                   : '🛡️ University Administrator'}
               </span>
-              {(formData.standing || formData.designation) && (
+              {(isTeacher ? formData.designation : formData.standing) && (
                 <span className="profile-standing-badge">
                   <Award size={12} style={{ marginRight: '4px' }} />
-                  {formData.designation || formData.standing}
+                  {isTeacher ? formData.designation : formData.standing}
                 </span>
               )}
             </div>

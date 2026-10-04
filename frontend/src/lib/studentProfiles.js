@@ -242,7 +242,13 @@ export function getStoredStudentProfile() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      // Ensure faculty fields don't pollute student profile
+      delete parsed.designation;
+      delete parsed.specialization;
+      delete parsed.staffId;
+      delete parsed.teachingLoad;
+      return parsed;
     }
   } catch (e) {
     console.error('Failed reading student profile:', e);
@@ -252,8 +258,13 @@ export function getStoredStudentProfile() {
 
 export function saveStoredStudentProfile(profile) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-    window.dispatchEvent(new CustomEvent('edutrack_profile_updated', { detail: profile }));
+    const cleanProfile = { ...profile };
+    delete cleanProfile.designation;
+    delete cleanProfile.specialization;
+    delete cleanProfile.staffId;
+    delete cleanProfile.teachingLoad;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cleanProfile));
+    window.dispatchEvent(new CustomEvent('edutrack_profile_updated', { detail: cleanProfile }));
   } catch (e) {
     console.error('Failed saving student profile:', e);
   }
