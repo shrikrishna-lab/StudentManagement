@@ -638,103 +638,66 @@ export default function ProfileModal({
 
         {/* TAB 3: SECURITY & PASSWORD CHANGE REQUEST (User Requirement 1) */}
         {activeTab === 'security' && (
-          <div className="profile-tab-content-area" style={{ padding: '20px 24px' }}>
+          <div className="profile-tab-content-area">
             {/* Account Credentials Summary */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '12px',
-                background: 'rgba(30, 41, 59, 0.4)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '12px',
-                padding: '16px',
-                marginBottom: '20px'
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '0.72rem', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>
+            <div className="profile-security-meta-card">
+              <div className="profile-security-meta-item">
+                <span className="profile-security-meta-label">
                   {isTeacher ? 'Staff Faculty ID' : 'Student PRN / Roll'}
-                </div>
-                <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#38bdf8', fontFamily: 'monospace', marginTop: '2px' }}>
+                </span>
+                <span className="profile-security-meta-val code">
                   {formData.prn || formData.staffId || (isTeacher ? 'FAC-IT-101' : 'RBT24IT001')}
-                </div>
+                </span>
               </div>
 
-              <div>
-                <div style={{ fontSize: '0.72rem', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>
-                  Authorized Role
-                </div>
-                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#f8fafc', marginTop: '2px' }}>
+              <div className="profile-security-meta-item">
+                <span className="profile-security-meta-label">Authorized Role</span>
+                <span className="profile-security-meta-val">
                   {isTeacher ? 'Faculty Member' : 'Undergraduate Student'}
-                </div>
+                </span>
               </div>
 
-              <div>
-                <div style={{ fontSize: '0.72rem', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>
-                  Registered Email
-                </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#cbd5e1', marginTop: '2px', wordBreak: 'break-all' }}>
+              <div className="profile-security-meta-item">
+                <span className="profile-security-meta-label">Registered Email</span>
+                <span className="profile-security-meta-val" style={{ fontSize: '0.85rem', wordBreak: 'break-all' }}>
                   {formData.email}
-                </div>
+                </span>
               </div>
 
-              <div>
-                <div style={{ fontSize: '0.72rem', fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>
-                  Account Security
-                </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#4ade80', marginTop: '2px' }}>
-                  ● Two-Tier Admin Verified
-                </div>
+              <div className="profile-security-meta-item">
+                <span className="profile-security-meta-label">Account Security</span>
+                <span className="profile-security-meta-val verified">
+                  <span style={{ fontSize: '10px' }}>●</span> Two-Tier Admin Verified
+                </span>
               </div>
             </div>
 
             {/* Existing Pending Request Notice */}
             {pendingUserRequest && pendingUserRequest.status === 'Pending' && (
-              <div
-                style={{
-                  background: 'rgba(245, 158, 11, 0.1)',
-                  border: '1px solid rgba(245, 158, 11, 0.3)',
-                  borderRadius: '12px',
-                  padding: '14px 18px',
-                  marginBottom: '20px',
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: '12px'
-                }}
-              >
-                <Clock size={20} style={{ color: '#fbbf24', flexShrink: 0, marginTop: '2px' }} />
+              <div className="profile-security-alert-pending">
+                <Clock size={20} style={{ color: '#d97706', flexShrink: 0, marginTop: '2px' }} />
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#fbbf24' }}>
+                  <div className="alert-title">
                     Password Change Request In Progress (#{pendingUserRequest.id})
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#cbd5e1', marginTop: '4px', lineHeight: 1.5 }}>
+                  <div className="alert-desc">
                     Your request to update credentials was submitted on{' '}
                     <strong>{new Date(pendingUserRequest.requestedAt).toLocaleDateString()}</strong>. It is currently awaiting review by the System Administrator. Once approved, you can log in with your new password.
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '6px' }}>
-                    Reason: "{pendingUserRequest.reason}"
-                  </div>
+                  {pendingUserRequest.reason && (
+                    <div className="alert-reason-pill">
+                      Reason: "{pendingUserRequest.reason}"
+                    </div>
+                  )}
                 </div>
               </div>
             )}
 
             {/* Approved Request Notice */}
             {pendingUserRequest && pendingUserRequest.status === 'Approved' && (
-              <div
-                style={{
-                  background: 'rgba(34, 197, 94, 0.1)',
-                  border: '1px solid rgba(34, 197, 94, 0.3)',
-                  borderRadius: '12px',
-                  padding: '12px 16px',
-                  marginBottom: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px'
-                }}
-              >
-                <CheckCircle2 size={18} style={{ color: '#4ade80', flexShrink: 0 }} />
-                <span style={{ fontSize: '0.82rem', color: '#86efac' }}>
+              <div className="profile-security-alert-approved">
+                <CheckCircle2 size={18} style={{ color: '#16a34a', flexShrink: 0 }} />
+                <span>
                   Your password change request (#{pendingUserRequest.id}) was approved by{' '}
                   <strong>{pendingUserRequest.reviewedBy || 'Administrator'}</strong>.
                 </span>
@@ -743,93 +706,49 @@ export default function ProfileModal({
 
             {/* Feedback Alerts */}
             {passwordFeedback.error && (
-              <div
-                style={{
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.35)',
-                  borderRadius: '10px',
-                  padding: '12px 16px',
-                  marginBottom: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  color: '#fca5a5',
-                  fontSize: '0.82rem'
-                }}
-              >
+              <div className="profile-security-alert-error">
                 <AlertCircle size={16} style={{ flexShrink: 0 }} />
                 <span>{passwordFeedback.error}</span>
               </div>
             )}
 
             {passwordFeedback.success && (
-              <div
-                style={{
-                  background: 'rgba(34, 197, 94, 0.15)',
-                  border: '1px solid rgba(34, 197, 94, 0.35)',
-                  borderRadius: '10px',
-                  padding: '12px 16px',
-                  marginBottom: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  color: '#86efac',
-                  fontSize: '0.82rem'
-                }}
-              >
+              <div className="profile-security-alert-success">
                 <CheckCircle2 size={16} style={{ flexShrink: 0 }} />
                 <span>{passwordFeedback.success}</span>
               </div>
             )}
 
             {/* Password Change Form */}
-            <form onSubmit={handleRequestPasswordChange} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '10px' }}>
-                <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 700, color: '#f8fafc' }}>
+            <form onSubmit={handleRequestPasswordChange} className="profile-security-form">
+              <div className="profile-security-form-header">
+                <h4 className="profile-security-form-title">
                   Request Password Update
                 </h4>
-                <p style={{ margin: '4px 0 0', fontSize: '0.78rem', color: '#94a3b8' }}>
+                <p className="profile-security-form-desc">
                   Per institutional safety guidelines, password changes require Administrator approval before being committed to the database.
                 </p>
               </div>
 
               {/* Current Password */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+              <div className="profile-security-field">
+                <label className="profile-security-label">
                   Current Password *
                 </label>
-                <div style={{ position: 'relative' }}>
+                <div className="profile-security-input-wrap">
                   <input
                     type={showCurrentPass ? 'text' : 'password'}
                     required
                     placeholder="Enter current password (demo: student / teacher / admin)"
                     value={currentPasswordInput}
                     onChange={(e) => setCurrentPasswordInput(e.target.value)}
-                    style={{
-                      width: '100%',
-                      background: 'rgba(30, 41, 59, 0.7)',
-                      border: '1px solid rgba(255, 255, 255, 0.15)',
-                      borderRadius: '8px',
-                      padding: '10px 40px 10px 14px',
-                      color: '#f8fafc',
-                      fontSize: '0.85rem',
-                      outline: 'none',
-                      boxSizing: 'border-box'
-                    }}
+                    className="profile-security-input"
                   />
                   <button
                     type="button"
                     onClick={() => setShowCurrentPass(!showCurrentPass)}
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#94a3b8',
-                      cursor: 'pointer'
-                    }}
+                    className="profile-security-eye-btn"
+                    title={showCurrentPass ? 'Hide password' : 'Show password'}
                   >
                     {showCurrentPass ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -837,77 +756,51 @@ export default function ProfileModal({
               </div>
 
               {/* New & Confirm Password Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
+                <div className="profile-security-field">
+                  <label className="profile-security-label">
                     New Password *
                   </label>
-                  <div style={{ position: 'relative' }}>
+                  <div className="profile-security-input-wrap">
                     <input
                       type={showNewPass ? 'text' : 'password'}
                       required
                       placeholder="Min 6 characters"
                       value={newPasswordInput}
                       onChange={(e) => setNewPasswordInput(e.target.value)}
-                      style={{
-                        width: '100%',
-                        background: 'rgba(30, 41, 59, 0.7)',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
-                        borderRadius: '8px',
-                        padding: '10px 40px 10px 14px',
-                        color: '#f8fafc',
-                        fontSize: '0.85rem',
-                        outline: 'none',
-                        boxSizing: 'border-box'
-                      }}
+                      className="profile-security-input"
                     />
                     <button
                       type="button"
                       onClick={() => setShowNewPass(!showNewPass)}
-                      style={{
-                        position: 'absolute',
-                        right: '12px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'transparent',
-                        border: 'none',
-                        color: '#94a3b8',
-                        cursor: 'pointer'
-                      }}
+                      className="profile-security-eye-btn"
+                      title={showNewPass ? 'Hide password' : 'Show password'}
                     >
                       {showNewPass ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
                   </div>
                 </div>
 
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <div className="profile-security-field">
+                  <label className="profile-security-label">
                     Confirm New Password *
                   </label>
-                  <input
-                    type="password"
-                    required
-                    placeholder="Repeat new password"
-                    value={confirmPasswordInput}
-                    onChange={(e) => setConfirmPasswordInput(e.target.value)}
-                    style={{
-                      width: '100%',
-                      background: 'rgba(30, 41, 59, 0.7)',
-                      border: '1px solid rgba(255, 255, 255, 0.15)',
-                      borderRadius: '8px',
-                      padding: '10px 14px',
-                      color: '#f8fafc',
-                      fontSize: '0.85rem',
-                      outline: 'none',
-                      boxSizing: 'border-box'
-                    }}
-                  />
+                  <div className="profile-security-input-wrap">
+                    <input
+                      type="password"
+                      required
+                      placeholder="Repeat new password"
+                      value={confirmPasswordInput}
+                      onChange={(e) => setConfirmPasswordInput(e.target.value)}
+                      className="profile-security-input no-btn"
+                    />
+                  </div>
                 </div>
               </div>
 
               {/* Justification / Note for Admin */}
-              <div>
-                <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+              <div className="profile-security-field">
+                <label className="profile-security-label">
                   Reason / Security Purpose (sent to Administrator)
                 </label>
                 <input
@@ -915,39 +808,16 @@ export default function ProfileModal({
                   placeholder="e.g. Updating initial temporary password to personal password"
                   value={passwordReason}
                   onChange={(e) => setPasswordReason(e.target.value)}
-                  style={{
-                    width: '100%',
-                    background: 'rgba(30, 41, 59, 0.7)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    borderRadius: '8px',
-                    padding: '10px 14px',
-                    color: '#f8fafc',
-                    fontSize: '0.85rem',
-                    outline: 'none',
-                    boxSizing: 'border-box'
-                  }}
+                  className="profile-security-input no-btn"
                 />
               </div>
 
               {/* Submit Button */}
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '6px' }}>
                 <button
                   type="submit"
                   disabled={isSubmittingPass}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '10px 22px',
-                    borderRadius: '8px',
-                    background: '#3b82f6',
-                    border: 'none',
-                    color: '#ffffff',
-                    fontSize: '0.85rem',
-                    fontWeight: 600,
-                    cursor: isSubmittingPass ? 'not-allowed' : 'pointer',
-                    opacity: isSubmittingPass ? 0.7 : 1
-                  }}
+                  className="profile-security-submit-btn"
                 >
                   <KeyRound size={15} />
                   <span>{isSubmittingPass ? 'Submitting Request...' : 'Submit Request to Admin'}</span>
