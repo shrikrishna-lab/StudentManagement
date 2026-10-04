@@ -373,13 +373,13 @@ export default function ProfileModal({
           {/* Top Cover Banner */}
           <div className="profile-modal-sky-cover">
             <div className="profile-modal-cover-brand">
-              <GraduationCap size={18} className="profile-modal-brand-icon" />
+              <GraduationCap size={17} className="profile-modal-brand-icon" />
               <span className="profile-modal-brand-text">
                 {isTeacher
-                  ? 'EduTrack Faculty & Staff Dossier'
+                  ? 'Faculty Profile'
                   : isAdmin
-                  ? 'EduTrack Institutional Administrator'
-                  : 'EduTrack Institutional Student Profile'}
+                  ? 'Administrator Profile'
+                  : 'Student Profile'}
               </span>
             </div>
 
@@ -403,20 +403,12 @@ export default function ProfileModal({
                 alt={formData.name}
                 className="profile-modal-avatar-img"
               />
-              <span className="profile-avatar-status-dot" title="Active on EduTrack Portal" />
+              <span className="profile-avatar-status-dot" title="Active" />
             </div>
 
             <div className="profile-role-tag-cluster">
               <span className="profile-role-tag">
-                {isStudent
-                  ? formData.gender === 'Female'
-                    ? '👩‍🎓 Female Student'
-                    : '👨‍🎓 Male Student'
-                  : isTeacher
-                  ? formData.gender === 'Female'
-                    ? '👩‍🏫 Faculty Member'
-                    : '👨‍🏫 Faculty Member'
-                  : '🛡️ University Administrator'}
+                {isTeacher ? 'Faculty' : isAdmin ? 'Administrator' : 'Student'}
               </span>
               {(isTeacher ? formData.designation : formData.standing) && (
                 <span className="profile-standing-badge">
@@ -431,7 +423,7 @@ export default function ProfileModal({
           <div className="profile-modal-identity">
             <div className="profile-modal-name-row">
               <h2 className="profile-modal-name">{formData.name}</h2>
-              <div className="profile-verified-badge" title="Identity Verified & Active">
+              <div className="profile-verified-badge" title="Active">
                 <CheckCircle2 size={16} />
               </div>
             </div>
@@ -447,22 +439,21 @@ export default function ProfileModal({
             onClick={() => setActiveTab('profile')}
           >
             <Eye size={13} />
-            <span>{isTeacher ? 'Dossier' : 'Overview'}</span>
+            <span>Overview</span>
           </button>
 
           <button
             type="button"
-            className={`profile-nav-pill profile-nav-pill--badge ${activeTab === 'id_card' ? 'active' : ''}`}
+            className={`profile-nav-pill ${activeTab === 'id_card' ? 'active' : ''}`}
             onClick={() => setActiveTab('id_card')}
           >
             <CreditCard size={13} />
-            <span>Smart ID</span>
-            <span className="id-card-new-pill">SMART</span>
+            <span>ID Card</span>
           </button>
 
           <button
             type="button"
-            className={`profile-nav-pill profile-nav-pill--badge ${activeTab === 'security' ? 'active' : ''}`}
+            className={`profile-nav-pill ${activeTab === 'security' ? 'active' : ''}`}
             onClick={() => {
               setActiveTab('security');
               refreshUserRequests();
@@ -471,7 +462,7 @@ export default function ProfileModal({
             <KeyRound size={13} />
             <span>Security</span>
             {pendingUserRequest && pendingUserRequest.status === 'Pending' && (
-              <span className="nav-pill-pending-dot" title="Password change pending" />
+              <span className="nav-pill-pending-dot" title="Request pending" />
             )}
           </button>
 
@@ -481,7 +472,7 @@ export default function ProfileModal({
             onClick={() => setActiveTab('edit')}
           >
             <Edit3 size={13} />
-            <span>Edit Profile</span>
+            <span>Edit</span>
           </button>
         </div>
 
@@ -493,7 +484,7 @@ export default function ProfileModal({
               <div className="persona-switcher-box">
                 <div className="persona-switcher-label">
                   <Users size={13} style={{ marginRight: '5px' }} />
-                  <span>Switch Active Student Candidate:</span>
+                  <span>Demo Switcher:</span>
                 </div>
                 <div className="persona-pills-row">
                   {PRESET_STUDENT_PERSONAS.map((p) => {
@@ -505,12 +496,12 @@ export default function ProfileModal({
                         type="button"
                         className={`persona-pill-btn ${isActive ? 'active' : ''}`}
                         onClick={() => handleSelectStudentPersona(p)}
-                        title={`Switch to ${p.name} (${p.gender}, Roll #${p.rollNumber}, ${p.course})`}
+                        title={`Switch to ${p.name}`}
                       >
-                        <span className="persona-pill-gender-emoji">{isFemale ? '👩‍🎓' : '👨‍🎓'}</span>
+                        <span className="persona-pill-gender-emoji">{isFemale ? '👩' : '👨'}</span>
                         <span className="persona-pill-name">{p.name.split(' ')[0]}</span>
                         <span className="persona-pill-tag">
-                          #{p.rollNumber} {isFemale ? '· F' : '· M'}
+                          #{p.rollNumber}
                         </span>
                       </button>
                     );
@@ -523,7 +514,7 @@ export default function ProfileModal({
             <div className="avatar-picker-section">
               <div className="avatar-picker-title">
                 <Sparkles size={13} style={{ color: '#059669', marginRight: '5px' }} />
-                <span>Choose 3D Academic Avatar (Male & Female Styles):</span>
+                <span>Choose Avatar:</span>
               </div>
               <div className="avatar-picker-grid">
                 {AVATAR_OPTIONS.map((av) => {
@@ -556,7 +547,7 @@ export default function ProfileModal({
             <div className="profile-metrics-strip">
               <div className="profile-metric-col">
                 <span className="profile-metric-title">
-                  {isStudent ? 'Roll Number & Div' : 'Staff Code'}
+                  {isStudent ? 'Roll Number' : 'Staff ID'}
                 </span>
                 <strong className="profile-metric-val">
                   {isStudent ? `#${formData.rollNumber} (${formData.division})` : formData.prn || 'FAC-101'}
@@ -564,13 +555,13 @@ export default function ProfileModal({
               </div>
               <div className="profile-metric-col">
                 <span className="profile-metric-title">
-                  {isStudent ? 'Degree / Program' : 'Department'}
+                  {isStudent ? 'Program' : 'Department'}
                 </span>
                 <strong className="profile-metric-val">{formData.course || formData.department || 'IT'}</strong>
               </div>
               <div className="profile-metric-col">
                 <span className="profile-metric-title">
-                  {isStudent ? 'Academic Term' : 'Academic Designation'}
+                  {isStudent ? 'Semester' : 'Designation'}
                 </span>
                 <strong className="profile-metric-val">
                   {isStudent ? formData.semester : formData.designation || 'Associate Professor'}
@@ -578,7 +569,7 @@ export default function ProfileModal({
               </div>
               <div className="profile-metric-col">
                 <span className="profile-metric-title">
-                  {isStudent ? 'SGPA / CGPA' : 'Teaching / Load'}
+                  {isStudent ? 'CGPA' : 'Teaching Load'}
                 </span>
                 <strong className="profile-metric-val" style={{ color: '#059669' }}>
                   {isStudent
@@ -593,7 +584,7 @@ export default function ProfileModal({
               <div className="profile-faculty-spec-box">
                 <div className="profile-faculty-spec-title">
                   <BookOpen size={14} style={{ color: '#059669', marginRight: '6px' }} />
-                  <span>Instructional Focus & Research Specialization:</span>
+                  <span>Specialization:</span>
                 </div>
                 <div className="profile-faculty-spec-desc">{formData.specialization}</div>
                 <div className="profile-faculty-office-row">
@@ -605,27 +596,6 @@ export default function ProfileModal({
                 </div>
               </div>
             )}
-
-            {/* Action Bar inside Overview (Apple Grade Styled Buttons) */}
-            <div className="profile-overview-actions-bar">
-              <button
-                type="button"
-                className="profile-action-btn-secondary"
-                onClick={() => setActiveTab('id_card')}
-              >
-                <CreditCard size={15} />
-                <span>{isTeacher ? 'Open Faculty Smart Card' : 'Open Virtual Student ID Card'}</span>
-              </button>
-
-              <button
-                type="button"
-                className="profile-action-btn-primary"
-                onClick={() => setActiveTab('edit')}
-              >
-                <Edit3 size={15} />
-                <span>{isTeacher ? 'Edit Faculty Details' : 'Edit Profile Details'}</span>
-              </button>
-            </div>
           </div>
         )}
 
@@ -667,7 +637,7 @@ export default function ProfileModal({
               <div className="profile-security-meta-item">
                 <span className="profile-security-meta-label">Account Security</span>
                 <span className="profile-security-meta-val verified">
-                  <span style={{ fontSize: '10px' }}>●</span> Two-Tier Admin Verified
+                  <span style={{ fontSize: '10px' }}>●</span> Verified
                 </span>
               </div>
             </div>
@@ -678,15 +648,14 @@ export default function ProfileModal({
                 <Clock size={20} style={{ color: '#d97706', flexShrink: 0, marginTop: '2px' }} />
                 <div>
                   <div className="alert-title">
-                    Password Change Request In Progress (#{pendingUserRequest.id})
+                    Password Request Pending (#{pendingUserRequest.id})
                   </div>
                   <div className="alert-desc">
-                    Your request to update credentials was submitted on{' '}
-                    <strong>{new Date(pendingUserRequest.requestedAt).toLocaleDateString()}</strong>. It is currently awaiting review by the System Administrator. Once approved, you can log in with your new password.
+                    Submitted on <strong>{new Date(pendingUserRequest.requestedAt).toLocaleDateString()}</strong>. Awaiting administrator review.
                   </div>
                   {pendingUserRequest.reason && (
                     <div className="alert-reason-pill">
-                      Reason: "{pendingUserRequest.reason}"
+                      "{pendingUserRequest.reason}"
                     </div>
                   )}
                 </div>
@@ -698,8 +667,8 @@ export default function ProfileModal({
               <div className="profile-security-alert-approved">
                 <CheckCircle2 size={18} style={{ color: '#16a34a', flexShrink: 0 }} />
                 <span>
-                  Your password change request (#{pendingUserRequest.id}) was approved by{' '}
-                  <strong>{pendingUserRequest.reviewedBy || 'Administrator'}</strong>.
+                  Password request (#{pendingUserRequest.id}) was approved by{' '}
+                  <strong>{pendingUserRequest.reviewedBy || 'Admin'}</strong>.
                 </span>
               </div>
             )}
@@ -723,10 +692,10 @@ export default function ProfileModal({
             <form onSubmit={handleRequestPasswordChange} className="profile-security-form">
               <div className="profile-security-form-header">
                 <h4 className="profile-security-form-title">
-                  Request Password Update
+                  Change Password
                 </h4>
                 <p className="profile-security-form-desc">
-                  Per institutional safety guidelines, password changes require Administrator approval before being committed to the database.
+                  Submit a request to update your login password.
                 </p>
               </div>
 
@@ -739,7 +708,7 @@ export default function ProfileModal({
                   <input
                     type={showCurrentPass ? 'text' : 'password'}
                     required
-                    placeholder="Enter current password (demo: student / teacher / admin)"
+                    placeholder="Enter current password"
                     value={currentPasswordInput}
                     onChange={(e) => setCurrentPasswordInput(e.target.value)}
                     className="profile-security-input"
@@ -748,7 +717,7 @@ export default function ProfileModal({
                     type="button"
                     onClick={() => setShowCurrentPass(!showCurrentPass)}
                     className="profile-security-eye-btn"
-                    title={showCurrentPass ? 'Hide password' : 'Show password'}
+                    title={showCurrentPass ? 'Hide' : 'Show'}
                   >
                     {showCurrentPass ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -774,7 +743,7 @@ export default function ProfileModal({
                       type="button"
                       onClick={() => setShowNewPass(!showNewPass)}
                       className="profile-security-eye-btn"
-                      title={showNewPass ? 'Hide password' : 'Show password'}
+                      title={showNewPass ? 'Hide' : 'Show'}
                     >
                       {showNewPass ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
@@ -801,11 +770,11 @@ export default function ProfileModal({
               {/* Justification / Note for Admin */}
               <div className="profile-security-field">
                 <label className="profile-security-label">
-                  Reason / Security Purpose (sent to Administrator)
+                  Reason (Optional)
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Updating initial temporary password to personal password"
+                  placeholder="e.g. Updating temporary password"
                   value={passwordReason}
                   onChange={(e) => setPasswordReason(e.target.value)}
                   className="profile-security-input no-btn"
@@ -820,7 +789,7 @@ export default function ProfileModal({
                   className="profile-security-submit-btn"
                 >
                   <KeyRound size={15} />
-                  <span>{isSubmittingPass ? 'Submitting Request...' : 'Submit Request to Admin'}</span>
+                  <span>{isSubmittingPass ? 'Submitting...' : 'Submit Request'}</span>
                 </button>
               </div>
             </form>
@@ -833,9 +802,7 @@ export default function ProfileModal({
             <div className="profile-fields-grid">
               {/* Full Name */}
               <div className="profile-field-item">
-                <label className="profile-field-label">
-                  {isTeacher ? 'Faculty Member Name' : 'Student Full Name'}
-                </label>
+                <label className="profile-field-label">Full Name</label>
                 <div className="profile-field-input-box">
                   <User size={15} className="profile-field-icon" />
                   <input
@@ -850,7 +817,7 @@ export default function ProfileModal({
 
               {/* Gender Selection */}
               <div className="profile-field-item">
-                <label className="profile-field-label">Gender Identity</label>
+                <label className="profile-field-label">Gender</label>
                 <div className="profile-gender-pill-group">
                   {['Female', 'Male', 'Other'].map((g) => (
                     <button
@@ -876,7 +843,7 @@ export default function ProfileModal({
                         }
                       }}
                     >
-                      {g === 'Female' ? '👩 Female' : g === 'Male' ? '👨 Male' : '✨ Other'}
+                      {g === 'Female' ? 'Female' : g === 'Male' ? 'Male' : 'Other'}
                     </button>
                   ))}
                 </div>
@@ -884,7 +851,7 @@ export default function ProfileModal({
 
               {/* Official University Email */}
               <div className="profile-field-item">
-                <label className="profile-field-label">Institutional Email</label>
+                <label className="profile-field-label">Email</label>
                 <div className="profile-field-input-box disabled">
                   <Mail size={15} className="profile-field-icon" />
                   <input
@@ -892,14 +859,13 @@ export default function ProfileModal({
                     className="profile-field-input"
                     value={formData.email}
                     disabled
-                    title="Official university email assigned by Registry"
                   />
                 </div>
               </div>
 
               {/* Phone */}
               <div className="profile-field-item">
-                <label className="profile-field-label">Primary Contact Phone</label>
+                <label className="profile-field-label">Phone</label>
                 <div className="profile-field-input-box">
                   <Phone size={15} className="profile-field-icon" />
                   <input
@@ -925,10 +891,10 @@ export default function ProfileModal({
                 </div>
               </div>
 
-              {/* Campus / Classroom Location */}
+              {/* Location */}
               <div className="profile-field-item">
                 <label className="profile-field-label">
-                  {isTeacher ? 'Office / Cabin Location' : 'Campus Desk / Section'}
+                  {isTeacher ? 'Office Location' : 'Classroom / Section'}
                 </label>
                 <div className="profile-field-input-box">
                   <MapPin size={15} className="profile-field-icon" />
@@ -948,9 +914,9 @@ export default function ProfileModal({
             <div className="profile-prefs-group">
               <div className="profile-pref-row">
                 <div className="profile-pref-text">
-                  <div className="profile-pref-title">Academic & Examination Notifications</div>
+                  <div className="profile-pref-title">Notifications</div>
                   <div className="profile-pref-sub">
-                    Receive SMS/email alerts for timetables, hall ticket clearance, and grade cards.
+                    Receive alerts for timetables, grades, and attendance updates.
                   </div>
                 </div>
                 <button
@@ -966,9 +932,9 @@ export default function ProfileModal({
 
               <div className="profile-pref-row">
                 <div className="profile-pref-text">
-                  <div className="profile-pref-title">Security & Session Protection</div>
+                  <div className="profile-pref-title">Security Alerts</div>
                   <div className="profile-pref-sub">
-                    Enforce strict institutional authentication and encrypted transcript downloads.
+                    Get notified of new login sessions and password changes.
                   </div>
                 </div>
                 <button
@@ -996,10 +962,10 @@ export default function ProfileModal({
                 {isSaved ? (
                   <>
                     <Check size={16} />
-                    <span>Saved Successfully!</span>
+                    <span>Saved!</span>
                   </>
                 ) : (
-                  <span>Save Profile Changes</span>
+                  <span>Save Changes</span>
                 )}
               </button>
             </div>

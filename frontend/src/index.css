@@ -3883,16 +3883,28 @@ tbody tr:hover {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
 }
 
-/* Custom Scrollbar for Profile Body */
+/* Custom Sleek Scrollbar for Profile Body */
 .profile-modal-body-scroll::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+}
+
+.profile-modal-body-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 14px 0;
 }
 
 .profile-modal-body-scroll::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgba(148, 163, 184, 0.45);
   border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.profile-modal-body-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
 }
 
 
