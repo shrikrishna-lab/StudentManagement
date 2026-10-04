@@ -496,12 +496,13 @@ export default function ProfileModal({
                         type="button"
                         className={`persona-pill-btn ${isActive ? 'active' : ''}`}
                         onClick={() => handleSelectStudentPersona(p)}
-                        title={`Switch to ${p.name}`}
+                        title={`Switch to ${p.name} (${p.course}, Year ${p.year}, Div ${p.division})`}
                       >
                         <span className="persona-pill-gender-emoji">{isFemale ? '👩' : '👨'}</span>
                         <span className="persona-pill-name">{p.name.split(' ')[0]}</span>
-                        <span className="persona-pill-tag">
-                          #{p.rollNumber}
+                        <span className="persona-pill-roll">#{p.rollNumber} · {p.course || 'IT'}</span>
+                        <span className="persona-pill-meta-tag">
+                          {p.year ? `Yr ${p.year}` : '3rd Yr'} · Div {p.division || 'A'}
                         </span>
                       </button>
                     );

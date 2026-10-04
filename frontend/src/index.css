@@ -4082,11 +4082,17 @@ tbody tr:hover {
 
 .persona-pills-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 680px) {
+  .persona-pills-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 440px) {
   .persona-pills-row {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -4096,13 +4102,14 @@ tbody tr:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px 6px;
+  padding: 8px 4px;
   border-radius: 12px;
   background: #ffffff;
   border: 1.5px solid #e2e8f0;
   cursor: pointer;
   transition: all 0.16s ease;
   text-align: center;
+  min-width: 0;
 }
 
 .persona-pill-btn:hover {
@@ -4126,12 +4133,23 @@ tbody tr:hover {
   font-size: 0.775rem;
   font-weight: 700;
   color: #0f172a;
+  line-height: 1.2;
 }
 
-.persona-pill-tag {
-  font-size: 0.675rem;
+.persona-pill-roll {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #0284c7;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.persona-pill-meta-tag {
+  font-size: 0.625rem;
+  font-weight: 600;
   color: #64748b;
   margin-top: 1px;
+  white-space: nowrap;
 }
 
 /* 3D Avatar Picker Grid */
