@@ -373,7 +373,11 @@ export default function ProfileModal({
           {/* Top Cover Banner */}
           <div className="profile-modal-sky-cover">
             <div className="profile-modal-cover-brand">
-              <GraduationCap size={17} className="profile-modal-brand-icon" />
+              <img
+                src="/assets/edutrack_emblem_transparent.png"
+                alt="EduTrack"
+                className="profile-modal-brand-pencil-logo"
+              />
               <span className="profile-modal-brand-text">
                 {isTeacher
                   ? 'Faculty Profile'
@@ -482,14 +486,16 @@ export default function ProfileModal({
             {/* Student Persona Quick Switcher */}
             {isStudent && (
               <div className="persona-switcher-box">
-                <div className="persona-switcher-label">
-                  <Users size={13} style={{ marginRight: '5px' }} />
-                  <span>Demo Switcher:</span>
+                <div className="persona-switcher-header">
+                  <div className="persona-switcher-label">
+                    <Users size={14} style={{ color: '#059669', marginRight: '6px' }} />
+                    <span>Switch Demo Student</span>
+                  </div>
+                  <span className="persona-switcher-hint">Select a profile to preview</span>
                 </div>
                 <div className="persona-pills-row">
                   {PRESET_STUDENT_PERSONAS.map((p) => {
                     const isActive = activePersonaId === p.id || formData.rollNumber === p.rollNumber;
-                    const isFemale = p.gender === 'Female';
                     return (
                       <button
                         key={p.id}
@@ -498,12 +504,25 @@ export default function ProfileModal({
                         onClick={() => handleSelectStudentPersona(p)}
                         title={`Switch to ${p.name} (${p.course}, Year ${p.year}, Div ${p.division})`}
                       >
-                        <span className="persona-pill-gender-emoji">{isFemale ? '👩' : '👨'}</span>
-                        <span className="persona-pill-name">{p.name.split(' ')[0]}</span>
-                        <span className="persona-pill-roll">#{p.rollNumber} · {p.course || 'IT'}</span>
-                        <span className="persona-pill-meta-tag">
-                          {p.year ? `Yr ${p.year}` : '3rd Yr'} · Div {p.division || 'A'}
-                        </span>
+                        <div className="persona-pill-avatar-wrap">
+                          <img
+                            src={p.avatarUrl || '/assets/student_avatar.jpg'}
+                            alt={p.name}
+                            className="persona-pill-avatar-img"
+                          />
+                          {isActive && (
+                            <span className="persona-pill-active-dot">
+                              <Check size={8} strokeWidth={3} />
+                            </span>
+                          )}
+                        </div>
+                        <div className="persona-pill-info">
+                          <span className="persona-pill-name">{p.name.split(' ')[0]}</span>
+                          <span className="persona-pill-roll-badge">#{p.rollNumber} • {p.course || 'IT'}</span>
+                          <span className="persona-pill-meta-tag">
+                            Yr {p.year || 3} • Div {p.division || 'A'}
+                          </span>
+                        </div>
                       </button>
                     );
                   })}

@@ -125,13 +125,9 @@ export default function VirtualIDCard({
               <div className="id-card-emblem-wrap">
                 <img
                   src="/assets/edutrack_emblem_transparent.png"
-                  alt="Emblem"
+                  alt="EduTrack Emblem"
                   className="id-card-emblem-img"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
                 />
-                <GraduationCap size={22} className="id-card-fallback-emblem" />
               </div>
               <div className="id-card-header-titles">
                 <span className="id-card-inst-name">EDUTRACK INSTITUTE OF TECHNOLOGY</span>
