@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduTrack — Complete Architecture & Technical Blueprint</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="docs-nav">
+    <a href="#" class="docs-brand">
+      <span>🎓 EduTrack</span>
+      <span class="brand-badge">SYSTEM DOCS</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#tech-stack" class="nav-link">Tech Stack</a>
+      <a href="#architecture" class="nav-link">Architecture</a>
+      <a href="#simulator" class="nav-link">Live Simulator</a>
+      <a href="#database" class="nav-link">Database Schema</a>
+      <a href="#code-viewer" class="nav-link">Code Inspector</a>
+      <a href="#roadmap" class="nav-link">Pillars</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-pill">
+        <span>⚡ Production-Ready Architecture Blueprint</span>
+      </div>
+      <h1 class="hero-title">Student Management System<br>Technical Documentation</h1>
+      <p class="hero-subtitle">
+        An interactive, visual deep-dive into the multi-tier Student Management System, covering the Pure Core Java backend, MySQL 8.0 database engine, beginner JDBC data flow, and modern React dashboard.
+      </p>
+
+      <!-- Stats Strip -->
+      <div class="stats-strip">
+        <div class="stat-box">
+          <div class="stat-num">3 Tiers</div>
+          <div class="stat-label">Frontend · Backend · Database</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">100% Core Java</div>
+          <div class="stat-label">No Spring / No ORM overhead</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">MySQL 8.0</div>
+          <div class="stat-label">Port 3306 Relational Engine</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">PreparedStatement</div>
+          <div class="stat-label">Zero SQL-Injection Vulnerability</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: TECH STACK MATRIX -->
+    <section id="tech-stack" class="section">
+      <div class="section-header">
+        <div class="section-tag">Technology Foundation</div>
+        <h2 class="section-title">The Complete Technology Stack</h2>
+        <p class="section-desc">Every technology selected, where it is used in the project, and why.</p>
+      </div>
+
+      <div class="tech-grid">
+        <!-- Core Java -->
+        <div class="tech-card">
+          <div class="tech-icon" style="background: rgba(249, 115, 22, 0.15); color: #f97316;">☕</div>
+          <div class="tech-role">Backend Engine</div>
+          <h3 class="tech-title">Pure Core Java</h3>
+          <p class="tech-desc">
+            Powers the business rules, data models, exception handling, and input validation without reliance on heavy frameworks.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Encapsulation</span>
+            <span class="tech-tag">Comparable</span>
+            <span class="tech-tag">Comparator (x6)</span>
+            <span class="tech-tag">Custom Exceptions</span>
+          </div>
+        </div>
+
+        <!-- JDBC -->
+        <div class="tech-card">
+          <div class="tech-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">🔌</div>
+          <div class="tech-role">Data Access Protocol</div>
+          <h3 class="tech-title">Beginner JDBC</h3>
+          <p class="tech-desc">
+            Direct database communication standard using raw sockets over port 3306. Enforces explicit control over connections and statements.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">DriverManager</span>
+            <span class="tech-tag">Connection</span>
+            <span class="tech-tag">PreparedStatement</span>
+            <span class="tech-tag">ResultSet</span>
+          </div>
+        </div>
+
+        <!-- MySQL -->
+        <div class="tech-card">
+          <div class="tech-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">🐬</div>
+          <div class="tech-role">Persistent Store</div>
+          <h3 class="tech-title">MySQL 8.0 Server</h3>
+          <p class="tech-desc">
+            Industrial-grade relational database running on port 3306 with strict schema constraints, unique keys, and auto-increment sequences.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">InnoDB Engine</span>
+            <span class="tech-tag">PRIMARY KEY</span>
+            <span class="tech-tag">UNIQUE roll_number</span>
+            <span class="tech-tag">DECIMAL(5,2)</span>
+          </div>
+        </div>
+
+        <!-- React + Vite -->
+        <div class="tech-card">
+          <div class="tech-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">⚛️</div>
+          <div class="tech-role">Client Interface</div>
+          <h3 class="tech-title">React + Vite</h3>
+          <p class="tech-desc">
+            Ultra-fast component dashboard built with soft pastel macOS styling, interactive timetable calendar, and 3 dedicated role panels.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Admin Panel</span>
+            <span class="tech-tag">Teacher Panel</span>
+            <span class="tech-tag">Student Panel</span>
+            <span class="tech-tag">Sidebar Docking</span>
+          </div>
+        </div>
+
+        <!-- MySQL Workbench -->
+        <div class="tech-card">
+          <div class="tech-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">🛠️</div>
+          <div class="tech-role">Visual Administration</div>
+          <h3 class="tech-title">MySQL Workbench</h3>
+          <p class="tech-desc">
+            Visual inspection GUI allowing developers to write raw SQL queries, monitor table rows, view indices, and verify Java operations.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Schema Inspector</span>
+            <span class="tech-tag">Query Tab</span>
+            <span class="tech-tag">Action Output</span>
+          </div>
+        </div>
+
+        <!-- Connector/J -->
+        <div class="tech-card">
+          <div class="tech-icon" style="background: rgba(244, 63, 94, 0.15); color: #fb7185;">📦</div>
+          <div class="tech-role">Driver Translation</div>
+          <h3 class="tech-title">MySQL Connector/J</h3>
+          <p class="tech-desc">
+            Official Type-4 JDBC network driver converting standard Java database calls into MySQL binary network protocol.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">mysql-connector-j-8.4.0</span>
+            <span class="tech-tag">TCP Port 3306</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE LIVE REQUEST SIMULATOR -->
+    <section id="simulator" class="section">
+      <div class="section-header">
+        <div class="section-tag">Interactive Simulation</div>
+        <h2 class="section-title">Live Request & Execution Pipeline</h2>
+        <p class="section-desc">
+          Select any CRUD operation below and run the live simulator to trace data packets as they travel across Java layers to MySQL Server.
+        </p>
+      </div>
+
+      <div class="simulator-card">
+        <!-- Toolbar -->
+        <div class="sim-toolbar">
+          <div class="sim-actions">
+            <button class="sim-btn active" data-op="insert">➕ 1. INSERT (Add Student)</button>
+            <button class="sim-btn" data-op="select">📋 2. SELECT (Fetch All)</button>
+            <button class="sim-btn" data-op="update">✏️ 3. UPDATE (Modify Score)</button>
+            <button class="sim-btn" data-op="delete">🗑️ 4. DELETE (Remove Student)</button>
+          </div>
+
+          <button id="runSimBtn" class="run-btn">
+            <span>▶ Run Live Simulation</span>
+          </button>
+        </div>
+
+        <!-- Visual Animated Pipeline Track -->
+        <div class="pipeline-track" id="pipelineTrack">
+          <div class="packet-indicator" id="packetIndicator"></div>
+
+          <div class="pipeline-node" id="node1">
+            <div class="node-icon">👤</div>
+            <div class="node-title">1. User Action</div>
+            <div class="node-sub">Console / React UI</div>
+          </div>
+
+          <div class="pipeline-node" id="node2">
+            <div class="node-icon">⚙️</div>
+            <div class="node-title">2. Service Layer</div>
+            <div class="node-sub">StudentService.java</div>
+          </div>
+
+          <div class="pipeline-node" id="node3">
+            <div class="node-icon">🏛️</div>
+            <div class="node-title">3. DAO Layer</div>
+            <div class="node-sub">StudentDAO.java</div>
+          </div>
+
+          <div class="pipeline-node" id="node4">
+            <div class="node-icon">🛡️</div>
+            <div class="node-title">4. PreparedStatement</div>
+            <div class="node-sub">SQL Parameter Binding</div>
+          </div>
+
+          <div class="pipeline-node" id="node5">
+            <div class="node-icon">🐬</div>
+            <div class="node-title">5. MySQL Engine</div>
+            <div class="node-sub">Port 3306 / InnoDB</div>
+          </div>
+
+          <div class="pipeline-node" id="node6">
+            <div class="node-icon">📊</div>
+            <div class="node-title">6. ResultSet / UI</div>
+            <div class="node-sub">Data Model Update</div>
+          </div>
+        </div>
+
+        <!-- Dual-Pane Live Console & Live DB State -->
+        <div class="sim-console-view">
+          <div class="console-pane">
+            <div class="console-header">
+              <span>🖥️ Live JDBC Execution Log</span>
+              <span style="color: var(--accent-green);">LIVE STREAM</span>
+            </div>
+            <div id="simLog">
+              <div class="log-entry log-info">[Ready] Select an operation above and click "Run Live Simulation".</div>
+            </div>
+          </div>
+
+          <div class="console-pane">
+            <div class="console-header">
+              <span>🗄️ MySQL Database Table Preview</span>
+              <span style="color: var(--accent-amber);">TABLE: students</span>
+            </div>
+            <table class="schema-table" style="font-size: 0.78rem;">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Roll</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Course</th>
+                  <th>Year</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody id="mockDbBody">
+                <!-- Rendered dynamically by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DATABASE SCHEMA & QUERIES -->
+    <section id="database" class="section">
+      <div class="section-header">
+        <div class="section-tag">Relational Design</div>
+        <h2 class="section-title">Database Schema & Table Structure</h2>
+        <p class="section-desc">Schema specifications for database: <code>student_management</code></p>
+      </div>
+
+      <div class="schema-table-box">
+        <table class="schema-table">
+          <thead>
+            <tr>
+              <th>Column Name</th>
+              <th>MySQL Data Type</th>
+              <th>Constraints</th>
+              <th>Architectural Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>id</code></td>
+              <td><code>INT</code></td>
+              <td><span class="col-badge pk">PRIMARY KEY</span> <span class="col-badge">AUTO_INCREMENT</span></td>
+              <td>Internal surrogate primary key generated automatically by MySQL (1, 2, 3...).</td>
+            </tr>
+            <tr>
+              <td><code>roll_number</code></td>
+              <td><code>INT</code></td>
+              <td><span class="col-badge unique">UNIQUE</span> <span class="col-badge">NOT NULL</span></td>
+              <td>Unique student roll number. Database-level safeguard against duplicates.</td>
+            </tr>
+            <tr>
+              <td><code>name</code></td>
+              <td><code>VARCHAR(100)</code></td>
+              <td><span class="col-badge">NOT NULL</span></td>
+              <td>Student's full name. Variable-length string up to 100 characters.</td>
+            </tr>
+            <tr>
+              <td><code>email</code></td>
+              <td><code>VARCHAR(100)</code></td>
+              <td><span class="col-badge">NOT NULL</span></td>
+              <td>Validated email address format for notifications.</td>
+            </tr>
+            <tr>
+              <td><code>phone</code></td>
+              <td><code>VARCHAR(15)</code></td>
+              <td><span class="col-badge">NOT NULL</span></td>
+              <td>10-digit mobile contact number stored with national prefix tolerance.</td>
+            </tr>
+            <tr>
+              <td><code>course</code></td>
+              <td><code>VARCHAR(50)</code></td>
+              <td><span class="col-badge">NOT NULL</span></td>
+              <td>Department abbreviation (IT, CS, EXTC, MECH).</td>
+            </tr>
+            <tr>
+              <td><code>year</code></td>
+              <td><code>INT</code></td>
+              <td><span class="col-badge">NOT NULL</span></td>
+              <td>Academic year of study (1 to 4).</td>
+            </tr>
+            <tr>
+              <td><code>division</code></td>
+              <td><code>VARCHAR(10)</code></td>
+              <td><span class="col-badge">NOT NULL</span></td>
+              <td>Class cohort division letter (A, B, C).</td>
+            </tr>
+            <tr>
+              <td><code>percentage</code></td>
+              <td><code>DECIMAL(5, 2)</code></td>
+              <td><span class="col-badge">NOT NULL</span></td>
+              <td>Exact academic percentage (e.g. 89.50) without floating-point rounding errors.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: CODE INSPECTOR -->
+    <section id="code-viewer" class="section">
+      <div class="section-header">
+        <div class="section-tag">Implementation Details</div>
+        <h2 class="section-title">Source Code Inspector</h2>
+        <p class="section-desc">Examine the exact Core Java source files executing this architecture.</p>
+      </div>
+
+      <div class="code-card">
+        <div class="code-tabs">
+          <button class="code-tab-btn active" data-tab="studentdao">StudentDAO.java</button>
+          <button class="code-tab-btn" data-tab="dbconnection">DBConnection.java</button>
+          <button class="code-tab-btn" data-tab="studentservice">StudentService.java</button>
+          <button class="code-tab-btn" data-tab="studentmodel">Student.java</button>
+          <button class="code-tab-btn" data-tab="sqlscript">student_management.sql</button>
+        </div>
+        <pre class="code-content-box"><code id="codeDisplay">Loading snippet...</code></pre>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SYSTEM ARCHITECTURE PILLARS -->
+    <section id="roadmap" class="section">
+      <div class="section-header">
+        <div class="section-tag">System Pillars</div>
+        <h2 class="section-title">Core Architecture Accomplishments</h2>
+        <p class="section-desc">The complete, standalone pillars powering the Student Management System without complex enterprise frameworks.</p>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-card" style="border-color: rgba(52, 211, 153, 0.4);">
+          <div class="tech-icon" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">☕</div>
+          <div class="tech-role" style="color: #34d399;">Pillar 1 · Java Core</div>
+          <h3 class="tech-title">Pure Core Java & Collections</h3>
+          <p class="tech-desc">
+            Encapsulated domain modeling, safe Iterator-based deletions, natural sorting via Comparable, 6 custom Comparator strategies, and exception safety.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">ArrayList</span>
+            <span class="tech-tag">Comparators</span>
+            <span class="tech-tag">InputUtil</span>
+          </div>
+        </div>
+
+        <div class="tech-card" style="border-color: rgba(56, 189, 248, 0.4);">
+          <div class="tech-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">🐬</div>
+          <div class="tech-role" style="color: #38bdf8;">Pillar 2 · Database</div>
+          <h3 class="tech-title">MySQL 8.0 & Beginner JDBC</h3>
+          <p class="tech-desc">
+            Direct socket persistence via PreparedStatement, ResultSet extraction, connection management, strict table constraints, and Workbench synchronization.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">PreparedStatement</span>
+            <span class="tech-tag">Port 3306</span>
+            <span class="tech-tag">StudentDAO</span>
+          </div>
+        </div>
+
+        <div class="tech-card" style="border-color: rgba(168, 85, 247, 0.4);">
+          <div class="tech-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">⚛️</div>
+          <div class="tech-role" style="color: #c084fc;">Pillar 3 · UI Dashboard</div>
+          <h3 class="tech-title">3-Role React Dashboard</h3>
+          <p class="tech-desc">
+            Modern macOS-inspired interface with dockable sidebar, 3 dedicated role portals (Admin, Faculty, Student), and an interactive timetable schedule.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Admin Panel</span>
+            <span class="tech-tag">Teacher Panel</span>
+            <span class="tech-tag">Student Panel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="docs-footer">
+    <div class="container" style="padding-bottom: 0;">
+      <p style="font-weight: 700; color: #ffffff;">EduTrack Academic Architecture</p>
+      <p style="margin-top: 0.35rem;">Designed and built as a paired programming learning project for B.Tech Information Technology.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

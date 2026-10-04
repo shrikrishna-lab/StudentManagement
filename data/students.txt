@@ -1,0 +1,6 @@
+# students.txt - format: rollNumber|name|email|phone|course|year|division|percentage
+101|Krrish Sharma|krrish.sharma@example.com|9876543210|IT|3|A|89.5
+102|Ananya Verma|ananya.verma@example.com|9811223344|CS|2|B|94.2
+103|Rohan Patel|rohan.patel@example.com|9822334455|IT|3|A|78.4
+104|Sneha Kulkarni|sneha.k@example.com|9833445566|EXTC|1|C|88.1
+105|Aditya Joshi|aditya.joshi@example.com|9844556677|CS|4|A|91.75
