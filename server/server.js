@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
@@ -10,19 +11,21 @@ const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// MySQL Connection Pool
+// MySQL Connection Pool – all credentials via environment variables
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 3306,
   user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'shrikrishna@sql77',
+  password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'student_management',
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
   waitForConnections: true,
-  connectionLimit: 20,
+  connectionLimit: 10,
   queueLimit: 0,
   enableKeepAlive: true,
   keepAliveInitialDelay: 0
 });
+
 
 // Create HTTP and WebSocket Server
 const server = http.createServer(app);
@@ -945,11 +948,18 @@ app.post('/api/assignments', async (req, res) => {
   }
 });
 
-// Start Server
-server.listen(PORT, () => {
-  console.log(`\n=============================================================`);
-  console.log(`🚀 EduTrack Realtime MySQL Server is LIVE on port ${PORT}`);
-  console.log(`📡 WebSocket Realtime Sync available on ws://localhost:${PORT}`);
-  console.log(`💾 Connected to MySQL [student_management]`);
-  console.log(`=============================================================\n`);
-});
+
+// Export app for Vercel serverless functions
+module.exports = app;
+
+// Start server only when running locally (not on Vercel)
+if (process.env.VERCEL !== '1') {
+  server.listen(PORT, () => {
+    console.log(`\n=============================================================`);
+    console.log(`🚀 EduTrack Realtime MySQL Server is LIVE on port ${PORT}`);
+    console.log(`📡 WebSocket Realtime Sync available on ws://localhost:${PORT}`);
+    console.log(`💾 Connected to MySQL [student_management]`);
+    console.log(`=============================================================\n`);
+  });
+}
+

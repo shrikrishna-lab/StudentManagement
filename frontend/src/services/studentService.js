@@ -9,7 +9,9 @@
  * - Live server health, ping latency, and database diagnostics
  */
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL
+  : (import.meta.env.DEV ? 'http://localhost:5000/api' : '/api');
 const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:5000';
 const STORAGE_KEY = 'edutrack_students_data_v2';
 
