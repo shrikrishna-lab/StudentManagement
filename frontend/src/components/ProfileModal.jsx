@@ -431,41 +431,39 @@ export default function ProfileModal({
           </div>
         </div>
 
-        {/* Modal Segmented Navigation Bar (Apple Grade, Cleanly Positioned) */}
+        {/* Modal Segmented Navigation Bar */}
         <div className="profile-nav-pills-bar">
           <button
             type="button"
             className={`profile-nav-pill ${activeTab === 'profile' ? 'active' : ''}`}
             onClick={() => setActiveTab('profile')}
           >
-            <Eye size={14} />
-            <span>{isTeacher ? 'Faculty Dossier' : 'Overview & Details'}</span>
+            <Eye size={13} />
+            <span>{isTeacher ? 'Dossier' : 'Overview'}</span>
           </button>
 
           <button
             type="button"
-            className={`profile-nav-pill ${activeTab === 'id_card' ? 'active' : ''}`}
+            className={`profile-nav-pill profile-nav-pill--badge ${activeTab === 'id_card' ? 'active' : ''}`}
             onClick={() => setActiveTab('id_card')}
           >
-            <CreditCard size={14} />
-            <span>{isTeacher ? 'Faculty Smart Card' : 'Virtual Smart ID'}</span>
+            <CreditCard size={13} />
+            <span>Smart ID</span>
             <span className="id-card-new-pill">SMART</span>
           </button>
 
           <button
             type="button"
-            className={`profile-nav-pill ${activeTab === 'security' ? 'active' : ''}`}
+            className={`profile-nav-pill profile-nav-pill--badge ${activeTab === 'security' ? 'active' : ''}`}
             onClick={() => {
               setActiveTab('security');
               refreshUserRequests();
             }}
           >
-            <KeyRound size={14} />
-            <span>Security & Password</span>
+            <KeyRound size={13} />
+            <span>Security</span>
             {pendingUserRequest && pendingUserRequest.status === 'Pending' && (
-              <span style={{ fontSize: '0.625rem', background: '#f59e0b', color: '#000', padding: '1px 6px', borderRadius: '999px', fontWeight: 800 }}>
-                PENDING
-              </span>
+              <span className="nav-pill-pending-dot" title="Password change pending" />
             )}
           </button>
 
@@ -474,7 +472,7 @@ export default function ProfileModal({
             className={`profile-nav-pill ${activeTab === 'edit' ? 'active' : ''}`}
             onClick={() => setActiveTab('edit')}
           >
-            <Edit3 size={14} />
+            <Edit3 size={13} />
             <span>Edit Profile</span>
           </button>
         </div>

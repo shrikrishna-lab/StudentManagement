@@ -4263,26 +4263,22 @@ tbody tr:hover {
 .profile-nav-pills-bar {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 3px;
   background: #f1f5f9;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 4px;
   margin: 12px 24px 18px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.profile-nav-pills-bar::-webkit-scrollbar {
-  display: none;
+  overflow: hidden;
 }
 
 .profile-nav-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
-  padding: 7px 13px;
+  padding: 7px 10px;
   border-radius: 10px;
   border: none;
   background: transparent;
@@ -4292,7 +4288,8 @@ tbody tr:hover {
   cursor: pointer;
   transition: all 0.18s ease;
   white-space: nowrap;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .profile-nav-pill:hover {
@@ -4307,8 +4304,14 @@ tbody tr:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* Tab with embedded badge — use relative to host the badge without growing */
+.profile-nav-pill--badge {
+  flex: 1.2;
+}
+
+/* Compact SMART label */
 .id-card-new-pill {
-  font-size: 0.575rem;
+  font-size: 0.55rem;
   font-weight: 800;
   padding: 1px 5px;
   border-radius: 999px;
@@ -4316,6 +4319,24 @@ tbody tr:hover {
   color: #ffffff;
   letter-spacing: 0.04em;
   box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+  flex-shrink: 0;
+}
+
+/* Pending amber dot — replaces bulky PENDING text badge */
+.nav-pill-pending-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+  flex-shrink: 0;
+  animation: pendingPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pendingPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
 }
 
 /* Profile Tab Content Area */
